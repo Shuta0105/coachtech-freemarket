@@ -32,8 +32,9 @@ coachtechフリマ
 
 #### .env.testing変更後
 - cp .env.testing .env.dusk.local
-- .env.dusk.local変更箇所
-APP_URL=http://nginx
+
+#### .env.dusk.local変更箇所 
+- APP_URL=http://nginx
 
 ## 開発環境
 - トップ画面：http://localhost/
