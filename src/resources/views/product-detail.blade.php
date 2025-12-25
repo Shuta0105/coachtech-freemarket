@@ -1,4 +1,3 @@
-@php use Illuminate\Support\Str; @endphp
 @extends('layout.app')
 
 @section('css')
@@ -8,7 +7,7 @@
 @section('content')
 <div class="product-detail__content">
     <div class="product-detail__img">
-        <img src="{{ Str::startsWith($item->img, 'http') ? $item->img : asset('storage/' . $item->img) }}">
+        <img src="{{ file_exists(public_path('img/' . $item->img)) ? asset('img/' . $item->img) : asset('storage/' . $item->img) }}">
     </div>
     <div class="product-detail__text">
         <div class="product-detail__header">
@@ -64,7 +63,11 @@
                 <tr class="product-detail__table-row">
                     <th class="product-detail__table-header">カテゴリー</th>
                     @foreach ($item_categories as $category)
-                    <td class="product-detail__table-item">{{ $category->category->content }}</td>
+                    <td class="product-detail__table-item--cat">
+                        <span class="product-detail__table-span--cat">
+                            {{ $category->category->content }}
+                        </span>
+                    </td>
                     @endforeach
                 </tr>
                 <tr class="product-detail__table-row">
@@ -80,7 +83,7 @@
             @foreach ($comments as $comment)
             <div class="product-detail__comment">
                 <div class="product-detail__comment-header">
-                    <img src="" alt="">
+                    <img src="{{ $comment->user->user_profile->avatar ? asset('storage/' . $comment->user->user_profile->avatar) : asset('img/kkrn_icon_user_6.png') }}">
                     <span class="product-detail__comment-header--name">{{ $comment->user->name }}</span>
                 </div>
                 <div class="product-detail__comment-body">{{ $comment->content }}</div>

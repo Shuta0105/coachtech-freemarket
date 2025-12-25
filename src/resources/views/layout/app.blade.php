@@ -25,8 +25,7 @@
                 name="keyword"
                 placeholder="なにをお探しですか？"
                 value="{{ request('keyword') }}"
-                dusk="search-input"
-                >
+                dusk="search-input">
             <div class="header__buttons">
                 @if (Auth::check())
                 <form action="/logout" class="logout__form" method="post">

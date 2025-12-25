@@ -1,4 +1,3 @@
-@php use Illuminate\Support\Str; @endphp
 @extends('layout.app')
 
 @section('css')
@@ -11,7 +10,7 @@
         <div class="purchase__left">
             <div class="purchase__item">
                 <div class="purchase__item-img">
-                    <img src="{{ Str::startsWith($item->img, 'http') ? $item->img : asset('storage/' . $item->img) }}">
+                    <img src="{{ file_exists(public_path('img/' . $item->img)) ? asset('img/' . $item->img) : asset('storage/' . $item->img) }}">
                 </div>
                 <div class="purchase__item-text">
                     <h1 class="purchase__item-text--name">{{ $item->name }}</h1>
@@ -91,7 +90,7 @@
         document.querySelectorAll('.form__error').forEach(el => el.textContent = '');
 
         const formData = new FormData(form);
-        const res = await fetch(`/create-checkout-session/${itemId}`, {
+        const res = await fetch(`/create-session/${itemId}`, {
             method: 'POST',
             headers: {
                 'X-CSRF-TOKEN': token,
@@ -112,6 +111,7 @@
         }
 
         const data = await res.json();
+
         stripe.redirectToCheckout({
             sessionId: data.id
         });

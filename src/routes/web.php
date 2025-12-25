@@ -4,6 +4,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\UserController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ItemController::class, 'index']);
@@ -16,7 +17,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/purchase/address/{item_id}', [ItemController::class, 'address']);
     Route::post('/purchase/address/{item_id}', [ItemController::class, 'update']);
 
-    Route::post('/create-checkout-session/{itemId}', [StripeController::class, 'createCheckoutSession']);
+    Route::post('/create-session/{itemId}', [StripeController::class, 'createSession']);
     Route::get('/stripe/order', [StripeController::class, 'order'])->name('stripe.order');
 
     Route::get('/sell', [ItemController::class, 'sell']);
@@ -36,3 +37,13 @@ Route::post('/email/verification-notification', function () {
     request()->user()->sendEmailVerificationNotification();
     return back();
 });
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+    $user = $request->user();
+
+    if ($user->last_login_at === null) {
+        return redirect('/mypage/profile');
+    }
+
+    return redirect('/');
+})->middleware(['auth', 'signed'])->name('verification.verify');

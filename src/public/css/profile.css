@@ -14,6 +14,7 @@
 
 .profile__user-name {
     flex: 1;
+    white-space: nowrap;
 }
 
 .profile__user-button--edit {
@@ -23,6 +24,7 @@
     border-radius: 3px;
     padding: 5px 10px;
     text-decoration: none;
+    white-space: nowrap;
 }
 
 .product-list__header {
@@ -54,25 +56,58 @@
 
 .product-list__img {
     position: relative;
+    aspect-ratio: 1/1;
 }
 
 .product-list__item-sold {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: blue;
     font-size: 70px;
     font-weight: bold;
     z-index: 2;
+    white-space: nowrap;
 }
 
 .product-list__img img {
-    width: 300px;
-    height: 300px;
-    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .product-list__item-name {
     font-size: 18px;
+}
+
+@media screen and (max-width: 768px) {
+    .product-list__inner {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 60px;
+        padding: 0 60px;
+    }
+    .profile__user {
+        margin: 40px auto;
+        width: 90%;
+        display: flex;
+        align-items: center;
+        gap: 30px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .product-list__inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .profile__user {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }

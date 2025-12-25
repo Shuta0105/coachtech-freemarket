@@ -22,7 +22,7 @@
 .purchase__item-img img {
     width: 180px;
     height: 180px;
-    object-fit: contain;
+    object-fit: cover;
 }
 
 .purchase__item-text--price {

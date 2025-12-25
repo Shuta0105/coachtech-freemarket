@@ -1,4 +1,3 @@
-@php use Illuminate\Support\Str; @endphp
 @extends('layout.app')
 
 @section('css')
@@ -80,7 +79,7 @@
                 .then(html => {
                     itemList.innerHTML = html;
                 });
-            // タブクリック後
+            // タブ クリック後
             syncActiveTab();
         });
     });
@@ -97,7 +96,6 @@
         });
     }
 
-    // 初回ロード時
     document.addEventListener('DOMContentLoaded', syncActiveTab);
 </script>
 @endsection

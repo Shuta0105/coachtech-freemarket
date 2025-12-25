@@ -12,6 +12,10 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    public function user_profile()
+    {
+        return $this->hasOne(UserProfile::class);
+    }
     public function likes()
     {
         return $this->hasMany(Like::class);
@@ -25,6 +29,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'last_login_at'
     ];
 
     /**

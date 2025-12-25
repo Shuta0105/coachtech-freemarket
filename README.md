@@ -46,7 +46,6 @@ coachtechフリマ
 - Laravel 8.83.29
 - MySQL 8.0.26
 - nginx 1.21.1
-- stripe 19.1.0
 
 ## ER図
 

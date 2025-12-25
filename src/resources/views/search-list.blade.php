@@ -5,7 +5,7 @@
             @if ($item->order_count > 0)
             <span class="product-list__item-sold">Sold</span>
             @endif
-            <img src="{{ Str::startsWith($item->img, 'http') ? $item->img : asset('storage/' . $item->img) }}">
+            <img src="{{ file_exists(public_path('img/' . $item->img)) ? asset('img/' . $item->img) : asset('storage/' . $item->img) }}">
         </div>
         <div class="product-list__item-name">{{ $item->name }}</div>
     </div>
