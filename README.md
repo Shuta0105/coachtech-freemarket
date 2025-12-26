@@ -63,6 +63,10 @@ coachtech フリマ
 - STRIPE_KEY
 - STRIPE_SECRET
 
+### Mailhog
+
+初回登録時と初回ログイン時にメール認証必須
+
 ## ユーザー情報
 
 - パスワードは「12345678」で一律作成可能

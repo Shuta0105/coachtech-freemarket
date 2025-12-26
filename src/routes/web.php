@@ -7,10 +7,12 @@ use App\Http\Controllers\UserController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [ItemController::class, 'index']);
-Route::get('/item/{item_id}', [ItemController::class, 'detail']);
+Route::middleware('cache.headers:no_store;max_age=0')->group(function () {
+    Route::get('/', [ItemController::class, 'index']);
+    Route::get('/item/{item_id}', [ItemController::class, 'detail']);
+});
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'cache.headers:no_store;max_age=0'])->group(function () {
     Route::post('/comment/{item_id}', [ItemController::class, 'comment']);
 
     Route::get('/purchase/{item_id}', [ItemController::class, 'purchase']);
