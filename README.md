@@ -51,7 +51,12 @@ coachtech フリマ
 
 「Laravel 環境構築」へ戻る
 
-## Stripe
+## 外部サービス
+
+- Stripe
+- Mailhog
+
+### Stripe
 
 本環境は Stripe で決済を行っています。Stripe の APIKey は各自で.env ファイルに設定してください。
 
